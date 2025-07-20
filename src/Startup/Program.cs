@@ -128,7 +128,7 @@ internal sealed class Program : IDisposable
     /// <param name="args">The command line args.</param>
     public async Task InitializeAsync(string[] args)
     {
-        this._logger.Information("Creating host...");
+        this._logger.Information("正在创建主机...");
         this._serverHost = await this.CreateHostAsync(args).ConfigureAwait(false);
 
         var autoStart = _systemConfiguration?.AutoStart is true
@@ -298,21 +298,21 @@ internal sealed class Program : IDisposable
         var host = builder.Build();
 
         // NpgsqlLoggingConfiguration.InitializeLogging(host.Services.GetRequiredService<ILoggerFactory>())
-        this._logger.Information("Host created");
+        this._logger.Information("主机创建完成");
 
         if (addAdminPanel)
         {
             host.ConfigureAdminPanel();
         }
 
-        this._logger.Information("Starting host...");
+        this._logger.Information("正在启动主机...");
         var stopwatch = new Stopwatch();
         stopwatch.Start();
 
         await host.StartAsync().ConfigureAwait(false);
         stopwatch.Stop();
-        this._logger.Information("Host started, elapsed time: {elapsed}", stopwatch.Elapsed);
-        this._logger.Information("Admin Panel bound to urls: {urls}", string.Join("; ", host.Urls));
+        this._logger.Information("主机启动完成，耗时: {elapsed}", stopwatch.Elapsed);
+        this._logger.Information("管理面板绑定到URL: {urls}", string.Join("; ", host.Urls));
         return host;
     }
 

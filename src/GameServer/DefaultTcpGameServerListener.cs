@@ -77,7 +77,7 @@ public class DefaultTcpGameServerListener : IGameServerListener
         }
 
         var port = this._endPoint.NetworkPort;
-        this._logger.LogInformation("Starting Server Listener, port {port}", port);
+        this._logger.LogInformation("正在启动服务器监听器，端口 {port}", port);
         this._listener = new Listener(port, this.CreateDecryptor, this.CreateEncryptor, this._loggerFactory);
         this._listener.ClientAccepted += this.OnClientAcceptedAsync;
         this._listener.ClientAccepting += this.OnClientAcceptingAsync;
@@ -95,7 +95,7 @@ public class DefaultTcpGameServerListener : IGameServerListener
         }
 
         this._listener.Start();
-        this._logger.LogInformation("Server listener started.");
+        this._logger.LogInformation("服务器监听器已启动.");
     }
 
     /// <inheritdoc/>

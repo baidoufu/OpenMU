@@ -174,7 +174,7 @@ public sealed class GameServerContainer : ServerContainerBase, IGameServerInstan
 
         this._servers.Add(gameServer);
         this._gameServers.Add(gameServer.Id, gameServer);
-        this._logger.LogInformation($"Game Server {gameServer.Id} - [{gameServer.Description}] initialized");
+        this._logger.LogInformation($"Game Server {gameServer.Id} - [{gameServer.Description}] 已初始化");
     }
 
     private async ValueTask LoadGameClientDefinitionsAsync(IContext persistenceContext)

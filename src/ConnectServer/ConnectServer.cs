@@ -128,7 +128,7 @@ public class ConnectServer : IConnectServer, OpenMU.Interfaces.IConnectServer
             return;
         }
 
-        this._logger.LogInformation("Begin starting");
+        this._logger.LogInformation("开始启动连接服务器");
         var oldState = this.ServerState;
         this.ServerState = OpenMU.Interfaces.ServerState.Starting;
         try
@@ -142,7 +142,7 @@ public class ConnectServer : IConnectServer, OpenMU.Interfaces.IConnectServer
             this.ServerState = oldState;
         }
 
-        this._logger.LogInformation("Finished starting");
+        this._logger.LogInformation("连接服务器启动完成");
     }
 
     /// <inheritdoc />

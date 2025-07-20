@@ -135,7 +135,7 @@ public sealed class ChatServer : IChatServer, IDisposable
             return;
         }
 
-        this._logger.LogInformation("Begin starting");
+        this._logger.LogInformation("开始启动聊天服务器");
         var oldState = this.ServerState;
         this.ServerState = OpenMU.Interfaces.ServerState.Starting;
         try
@@ -152,11 +152,11 @@ public sealed class ChatServer : IChatServer, IDisposable
         }
         catch (Exception ex)
         {
-            this._logger.LogError(ex, "Error while starting");
+            this._logger.LogError(ex, "聊天服务器启动出错");
             this.ServerState = oldState;
         }
 
-        this._logger.LogInformation("Finished starting");
+        this._logger.LogInformation("聊天服务器启动完成");
     }
 
     /// <inheritdoc />

@@ -69,7 +69,7 @@ internal class ClientListener
         this._listener.ClientAccepted += this.OnClientAcceptedAsync;
         this._listener.Start(this._connectServerSettings.ListenerBacklog);
 
-        this._logger.LogInformation("Client Listener started, Port {0}", this._connectServerSettings.ClientListenerPort);
+        this._logger.LogInformation("客户端监听器已启动，端口 {0}", this._connectServerSettings.ClientListenerPort);
     }
 
     /// <summary>
