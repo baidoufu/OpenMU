@@ -12,7 +12,7 @@ using Microsoft.Win32;
 /// </summary>
 internal class ClientSettings
 {
-    private const string DefaultLanguage = "Eng";
+    private const string DefaultLanguage = "中文";
 
     /// <summary>
     /// Gets or sets the client color depth.
