@@ -220,6 +220,9 @@ namespace MUnique.OpenMU.Persistence.EntityFramework.Migrations
                     b.Property<Guid?>("PowerUpDefinitionValueId")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("SkillId")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid?>("TargetAttributeId")
                         .HasColumnType("uuid");
 
@@ -232,6 +235,8 @@ namespace MUnique.OpenMU.Persistence.EntityFramework.Migrations
                     b.HasIndex("OperandAttributeId");
 
                     b.HasIndex("PowerUpDefinitionValueId");
+
+                    b.HasIndex("SkillId");
 
                     b.HasIndex("TargetAttributeId");
 
@@ -993,6 +998,9 @@ namespace MUnique.OpenMU.Persistence.EntityFramework.Migrations
                     b.Property<string>("CharacterNameRegex")
                         .HasColumnType("text");
 
+                    b.Property<bool>("ClampMoneyOnPickup")
+                        .HasColumnType("boolean");
+
                     b.Property<double>("DamagePerOneItemDurability")
                         .HasColumnType("double precision");
 
@@ -1058,6 +1066,9 @@ namespace MUnique.OpenMU.Persistence.EntityFramework.Migrations
 
                     b.Property<byte>("MinimumMonsterLevelForMasterExperience")
                         .HasColumnType("smallint");
+
+                    b.Property<bool>("PreventExperienceOverflow")
+                        .HasColumnType("boolean");
 
                     b.Property<int>("RecoveryInterval")
                         .HasColumnType("integer");
@@ -3420,6 +3431,11 @@ namespace MUnique.OpenMU.Persistence.EntityFramework.Migrations
                         .HasForeignKey("PowerUpDefinitionValueId")
                         .OnDelete(DeleteBehavior.Cascade);
 
+                    b.HasOne("MUnique.OpenMU.Persistence.EntityFramework.Model.Skill", null)
+                        .WithMany("RawAttributeRelationships")
+                        .HasForeignKey("SkillId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("MUnique.OpenMU.Persistence.EntityFramework.Model.AttributeDefinition", "RawTargetAttribute")
                         .WithMany()
                         .HasForeignKey("TargetAttributeId");
@@ -5075,6 +5091,8 @@ namespace MUnique.OpenMU.Persistence.EntityFramework.Migrations
             modelBuilder.Entity("MUnique.OpenMU.Persistence.EntityFramework.Model.Skill", b =>
                 {
                     b.Navigation("JoinedQualifiedCharacters");
+
+                    b.Navigation("RawAttributeRelationships");
 
                     b.Navigation("RawConsumeRequirements");
 
