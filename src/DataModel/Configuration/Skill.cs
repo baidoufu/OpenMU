@@ -199,7 +199,7 @@ public partial class Skill
     /// <summary>
     /// Gets or sets the name.
     /// </summary>
-    public string Name { get; set; } = string.Empty;
+    public LocalizedString Name { get; set; }
 
     /// <summary>
     /// Gets or sets the attack damage. Only relevant for attack skills.
@@ -223,9 +223,9 @@ public partial class Skill
     /// </summary>
     /// <remarks>
     /// For example, horse skill:
-    ///  * new AttributeRelationship(Stats.SkillDamageBonus, 1.0f / 10, Stats.TotalStrength)
-    ///  * new AttributeRelationship(Stats.SkillDamageBonus, 1.0f / 5, Stats.TotalLeadership)
-    ///  * new AttributeRelationship(Stats.SkillDamageBonus, 10, Stats.HorseLevel).
+    ///  * new AttributeRelationship(Stats.SkillBaseDamageBonus, 1.0f / 10, Stats.TotalStrength)
+    ///  * new AttributeRelationship(Stats.SkillBaseDamageBonus, 1.0f / 5, Stats.TotalLeadership)
+    ///  * new AttributeRelationship(Stats.SkillBaseDamageBonus, 10, Stats.HorseLevel).
     /// </remarks>
     [MemberOfAggregate]
     public virtual ICollection<AttributeRelationship> AttributeRelationships { get; protected set; } = null!;
@@ -309,8 +309,8 @@ public partial class Skill
     public virtual AreaSkillSettings? AreaSkillSettings { get; set; }
 
     /// <inheritdoc />
-    public override string ToString()
+    public override string? ToString()
     {
-        return this.Name;
+        return this.Name.ToString();
     }
 }

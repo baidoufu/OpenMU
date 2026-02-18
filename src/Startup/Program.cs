@@ -26,6 +26,7 @@ using MUnique.OpenMU.LoginServer;
 using MUnique.OpenMU.Network;
 using MUnique.OpenMU.Persistence;
 using MUnique.OpenMU.Persistence.EntityFramework;
+using MUnique.OpenMU.Persistence.EntityFramework.Json;
 using MUnique.OpenMU.Persistence.Initialization;
 using MUnique.OpenMU.Persistence.Initialization.Version075;
 using MUnique.OpenMU.Persistence.InMemory;
@@ -34,6 +35,7 @@ using MUnique.OpenMU.Web.AdminPanel;
 using MUnique.OpenMU.Web.AdminPanel.Services;
 using MUnique.OpenMU.Web.API;
 using MUnique.OpenMU.Web.Map.Map;
+using MUnique.OpenMU.Web.Shared;
 using Nito.AsyncEx.Synchronous;
 using Serilog;
 using Serilog.Debugging;
@@ -128,6 +130,9 @@ internal sealed class Program : IDisposable
     /// <param name="args">The command line args.</param>
     public async Task InitializeAsync(string[] args)
     {
+        JsonConverterRegistry.RegisterConverter(new LocalizedStringJsonConverter());
+        JsonConverterRegistry.RegisterConverter(new BinaryAsHexJsonConverter());
+
         this._logger.Information("正在创建主机...");
         this._serverHost = await this.CreateHostAsync(args).ConfigureAwait(false);
 

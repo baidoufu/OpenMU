@@ -18,7 +18,8 @@ using MUnique.OpenMU.PlugIns;
 /// <summary>
 /// This update fixes the Chaos Weapon, First Wings, Dinorant, Item Level Upgrade, Second Wings, Third Wings, Cape, SD Potions, Guardian Option, and Secromicon crafting settings; Blue Fenrir (Protect) damage decrease option value; Wizard's Ring wizardry option; lvl 380 item guardian options for Summoner and Rage Fighter.
 /// </summary>
-[PlugIn(PlugInName, PlugInDescription)]
+[PlugIn]
+[Display(Name = PlugInName, Description = PlugInDescription)]
 [Guid("EFD7EA69-56AE-48A3-ACE2-1C3B5B87780A")]
 public class FixChaosMixesPlugInSeason6 : FixChaosMixesPlugInBase
 {
@@ -55,13 +56,13 @@ public class FixChaosMixesPlugInSeason6 : FixChaosMixesPlugInBase
             if (gameConfiguration.DropItemGroups.Single(dig => dig.Description == "Dark Horse Spirit") is { } oldHorseGroup
                 && gameConfiguration.DropItemGroups.Single(dig => dig.Description == "Dark Raven Spirit") is { } oldRavenGroup)
             {
-                DeleteDropItemGroup(oldHorseGroup);
-                DeleteDropItemGroup(oldRavenGroup);
+                await DeleteDropItemGroupAsync(oldHorseGroup).ConfigureAwait(false);
+                await DeleteDropItemGroupAsync(oldRavenGroup).ConfigureAwait(false);
                 CreateDropItemGroup(0, "Dark Horse Spirit", 102);
                 CreateDropItemGroup(1, "Dark Raven Spirit", 96);
             }
 
-            void DeleteDropItemGroup(DropItemGroup group)
+            async ValueTask DeleteDropItemGroupAsync(DropItemGroup group)
             {
                 group.PossibleItems.Clear();
                 foreach (var map in maps)
@@ -73,7 +74,7 @@ public class FixChaosMixesPlugInSeason6 : FixChaosMixesPlugInBase
                 }
 
                 gameConfiguration.DropItemGroups.Remove(group);
-                context.DeleteAsync(group);
+                await context.DeleteAsync(group).ConfigureAwait(false);
             }
 
             void CreateDropItemGroup(int itemLevel, string description, short minimumMonsterLevel)
